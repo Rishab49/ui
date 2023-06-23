@@ -2,7 +2,7 @@ let SVG = document.querySelector("svg");
 let cardElements = document.querySelectorAll(".element");
 let factor = 0,
   canAlignCards = true,
-  activeIndex = 3;
+  activeIndex = -1;
 let totalLength, cx, cy, circle;
 function init() {
   console.log(circle);
@@ -23,6 +23,86 @@ function init() {
   factor = totalLength / cardElements.length;
 }
 
+function calcAngle(point) {
+  let radian = Math.atan2(point.y - cy, point.x - cx);
+  let degree = radian * (180 / Math.PI);
+  return Math.floor(degree) + 90;
+}
+
+function SVGToScreen(svgX, svgY) {
+  var p = SVG.createSVGPoint();
+  p.x = svgX;
+  p.y = svgY;
+  return p.matrixTransform(SVG.getScreenCTM());
+}
+
+function callRotateRightCards() {
+  canAlignCards ? rotateRightCards() : null;
+}
+
+function rotateRightCards() {
+  activeIndex <= 0 ? (activeIndex = 11) : activeIndex--;
+  console.log(12 - activeIndex);
+  canAlignCards = false;
+  drawCards();
+}
+
+function rotateLeftCards() {
+  activeIndex >= 11 ? (activeIndex = 0) : activeIndex++;
+  console.log(12 - activeIndex);
+  canAlignCards = false;
+  drawCards();
+}
+
+function setAttribute(elem, attr, val) {
+  elem.setAttributeNS(null, attr, val);
+}
+
+function getPlusOne(index) {
+  return index + 1 > 11 ? 0 : index + 1;
+}
+function getMinusOne(index) {
+  return index - 1 < 0 ? 11 : index - 1;
+}
+function alignCards() {
+  document.querySelector(".button-container").classList.add("visible");
+  this.classList.remove("wiggle");
+  cardElements.forEach((card) => {
+    card.style.top = "0";
+    card.style.left = "0";
+    card.style.transform = "";
+  });
+  callRotateRightCards();
+  cardElements[11].removeEventListener("click", alignCards);
+}
+
+function drawCards() {
+  cardElements.forEach(function (e, index) {
+    let length =
+      totalLength - 0.25 * totalLength - (index + activeIndex) * factor;
+    length < 0 ? (length = totalLength + length) : null;
+    length > totalLength ? (length = length - totalLength) : null;
+    let point = circle.getPointAtLength(length);
+    let degree =
+      index == getMinusOne(activeIndex == 0 ? 0 : 12 - activeIndex)
+        ? (console.log("minus one", index), calcAngle(point) - 30)
+        : index == getPlusOne(activeIndex == 0 ? 0 : 12 - activeIndex)
+        ? (console.log("plus one", index), calcAngle(point) + 30)
+        : calcAngle(point);
+    let coords = SVGToScreen(point.x, point.y);
+
+    e.style.transform = `translateX(${coords.x - 100}px) translateY(${
+      coords.y - 125
+    }px) rotateZ(${degree}deg)`;
+    if (index == cardElements.length - 1) {
+      setTimeout(() => {
+        canAlignCards = true;
+      }, 500);
+    }
+  });
+}
+
+cardElements[11].addEventListener("click", alignCards);
 window.addEventListener("load", init);
 
 window.addEventListener("resize", () => {
@@ -38,83 +118,5 @@ window.addEventListener("resize", () => {
 
   setAttribute(circle, "cx", cx);
   totalLength = circle.getTotalLength();
-  rotateCards();
+  drawCards();
 });
-
-function calcAngle(point) {
-  let radian = Math.atan2(point.y - cy, point.x - cx);
-  let degree = radian * (180 / Math.PI);
-  return Math.floor(degree) + 90;
-}
-
-function SVGToScreen(svgX, svgY) {
-  var p = SVG.createSVGPoint();
-  p.x = svgX;
-  p.y = svgY;
-  return p.matrixTransform(SVG.getScreenCTM());
-}
-
-function callRotateCards() {
-  canAlignCards ? rotateCards() : null;
-}
-
-function rotateCards() {
-  activeIndex >= 11 ? (activeIndex = 0) : activeIndex++;
-  console.log(activeIndex), (canAlignCards = false);
-  cardElements.forEach(function (e, index) {
-    let length =
-      totalLength - index * (totalLength / cardElements.length) + factor;
-    length > totalLength ? (length = length - totalLength) : null;
-    let point = circle.getPointAtLength(length);
-    let degree =
-      index == getMinusOne()
-        ? calcAngle(point) - 30
-        : index == getPlusOne()
-        ? calcAngle(point) + 30
-        : calcAngle(point);
-    let coords = SVGToScreen(point.x, point.y);
-
-    e.style.transform = `translateX(${coords.x - 100}px) translateY(${
-      coords.y - 125
-    }px) rotateZ(${degree}deg)`;
-    if (index == cardElements.length - 1) {
-      setTimeout(() => {
-        canAlignCards = true;
-      }, 500);
-    }
-  });
-  if (factor > totalLength) {
-    factor = (activeIndex - 2) * (totalLength / cardElements.length);
-    console.log("gets bigger", activeIndex, factor);
-  } else {
-    factor += totalLength / cardElements.length;
-    console.log(activeIndex, factor);
-  }
-}
-
-function setAttribute(elem, attr, val) {
-  elem.setAttributeNS(null, attr, val);
-}
-
-function getPlusOne() {
-  return activeIndex + 1 > 11 ? 0 : activeIndex + 1;
-}
-function getMinusOne() {
-  return activeIndex - 1 < 0 ? 11 : activeIndex - 1;
-}
-
-window.addEventListener("wheel", callRotateCards);
-
-cardElements[11].addEventListener("click", alignCards);
-
-function alignCards() {
-  cardElements.forEach((card) => {
-    card.style.top = "0";
-    card.style.left = "0";
-    card.style.transform = "";
-  });
-
-  callRotateCards();
-
-  cardElements[11].removeEventListener("click", alignCards);
-}
