@@ -2,12 +2,24 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Clash Grotesk', sans-serif;
 }
 
 body {
   height: 100vh;
   width: 100vw;
   overflow: hidden;
+}
+
+header{
+  height:45px;
+  width:100%;
+  display:flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: black;
+  color:gray;
+  padding: 1rem;
 }
 
 .container {
@@ -33,6 +45,12 @@ body {
   left:50%;
   transform:translateX(-50%) translateY(-50%);
   box-shadow: 2px 2px 5px #00000017;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.wiggle{
+  animation:wiggle 2s ease infinite;
 }
 
 .element:nth-child(even) {
@@ -42,11 +60,79 @@ body {
 .element:nth-child(odd) {
   background-color: rgb(255, 103, 103);
 }
-
 svg {
   height: 100%;
   width: 100%;
   position: absolute;
   top: 0;
   left: 0;
+}
+
+.button-container{
+  display: flex;
+  gap:1rem;
+  position: absolute;
+  top:90vh;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 100;
+  top:110vh;
+  left: 50%;
+  width: fit-content;
+}
+
+
+.visible{
+  top:90vh;
+}
+
+button{
+  height: 45px;
+  width: 45px;
+  padding:1.5rem;
+  background-color: gray;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border:0;
+
+}
+
+@keyframes wiggle{
+  0%{
+    transform: translateX(-50%) translateY(-50%) rotateZ(0);
+  }
+  
+  5%{
+    transform: translateX(-50%) translateY(-50%) rotateZ(15deg);
+  }
+  10%{
+    transform: translateX(-50%) translateY(-50%) rotateZ(-15deg);
+  }
+  15%{
+    transform: translateX(-50%) translateY(-50%) rotateZ(15deg);
+  }
+  20%{
+    transform: translateX(-50%) translateY(-50%) rotateZ(-15deg);
+  }
+  25%{
+    transform: translateX(-50%) translateY(-50%) rotateZ(15deg);
+  }
+  30%{
+    transform: translateX(-50%) translateY(-50%) rotateZ(-15deg);
+  }
+  35%{
+    transform: translateX(-50%) translateY(-50%) rotateZ(15deg);
+  }
+  40%{
+    transform: translateX(-50%) translateY(-50%) rotateZ(-15deg);
+  }
+  45%{
+    transform: translateX(-50%) translateY(-50%) rotateZ(0deg);
+  }
+  
+  100%{
+    transform: translateX(-50%) translateY(-50%) rotateZ(0deg);
+  }
 }
