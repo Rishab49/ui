@@ -94,6 +94,14 @@ function drawCards() {
     e.style.transform = `translateX(${coords.x - 100}px) translateY(${
       coords.y - 125
     }px) rotateZ(${degree}deg)`;
+
+    activeIndex == 0
+      ? index == 0
+        ? ((e.style.opacity = "1"), (e.style.borderWidth = "10px"))
+        : ((e.style.opacity = "0.25"), (e.style.borderWidth = "2px"))
+      : index == 12 - activeIndex
+        ? ((e.style.opacity = "1"), (e.style.borderWidth = "10px"))
+        : ((e.style.opacity = "0.25"), (e.style.borderWidth = "2px"));
     if (index == cardElements.length - 1) {
       setTimeout(() => {
         canAlignCards = true;
