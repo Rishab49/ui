@@ -11,13 +11,15 @@
 }
 
 body {
-  height: 100vh;
+  height: fit-content;
   width: 100vw;
   background-image: radial-gradient(#ffeaaa, #00004e);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 2rem;
+  flex-wrap: wrap;
+  padding: 2rem;
 }
 
 .card {
@@ -28,25 +30,37 @@ body {
   position: relative;
   border-radius: 15px;
   overflow: hidden;
+  min-width: 300px;
 }
 .card .img_container {
   height: 300px;
   width: 100%;
   background-size: cover;
+  perspective: 1000px;
+  background: black;
 }
 
-.card:nth-child(1) .img_container {
-  background-image: url("./assets/characters/heat.jpeg");
-}
-.card:nth-child(2) .img_container {
-  background-image: url("./assets/characters/strongman.jpeg");
+.img_container:hover img {
+  filter: sepia();
 }
 
+.img_container img {
+  height: 100%;
+  width: auto;
+  transform-style: preserve-3d;
+  transition: all 0.5s ease;
+}
 #separator {
   position: absolute;
   top: calc(300px - 30px);
   left: 0;
   width: 100%;
+}
+
+#power,
+#special_power {
+  transform-box: fill-box;
+  transform-origin: center;
 }
 
 .card .info_container {
