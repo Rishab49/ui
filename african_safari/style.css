@@ -1,0 +1,204 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Satoshi", sans-serif;
+}
+
+body {
+  position: relative;
+  background: black;
+  /* overflow: hidden; */
+}
+.bg-container {
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  background-image: url("./background.jpg");
+  background-size: cover;
+  background-position: left center;
+  background-attachment: fixed;
+  z-index: -10;
+}
+.container {
+  position: relative;
+  height: 100vh;
+  width: 50vw;
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+  font-weight: bold;
+}
+.container::before,
+.container::after {
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  background-image: url("./background.jpg");
+  background-size: cover;
+  background-position: left center;
+  background-attachment: fixed;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.container::after {
+  content: "Forest";
+  top: -0.19ch;
+  left: 0;
+  font-size: clamp(2.5rem, 20vw, 10rem);
+}
+
+.container::before {
+  content: "african";
+  top: -2.5ch;
+  left: -2.2ch;
+  font-size: clamp(1rem, 10vw, 4.5rem);
+}
+
+.heading-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.heading {
+  font-size: clamp(2.5rem, 20vw, 10rem);
+  z-index: -1;
+  font-weight: bold;
+  background: linear-gradient(to right, transparent 50%, wheat 50%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.sub-heading {
+  font-size: clamp(1rem, 10vw, 4rem);
+  font-weight: bold;
+  margin-left: 5ch;
+  margin-top: -1ch;
+  color: wheat;
+  width: fit-content;
+}
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  padding: 1rem;
+  display: flex;
+  gap: 2rem;
+  width: 50vw;
+  justify-content: space-between;
+}
+.social-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.social-container i{
+  padding:0.5rem;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+.social-container i:hover{
+  color:wheat;
+  border-bottom:1px solid wheat;
+}
+
+.para-container {
+  position: absolute;
+  height: fit-content;
+  width: 50vw;
+  bottom: 0;
+  left: 0;
+  color: wheat;
+  font-size: 0.9rem;
+  padding: 2rem 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.para-container button {
+  position:relative;
+  padding: 1rem 2rem;
+  width: fit-content;
+  color: wheat;
+  border: 0;
+  cursor: pointer;
+  background-image: url("./background.jpg");
+  background-position: left center;
+  background-attachment: fixed;
+  background-size: 100vw 100vh;
+  overflow: hidden;
+}
+.para-container button::after{
+position: absolute;
+height:100%;
+width:100%;
+background-color: white;
+content:"More Details";
+top:0;
+left:0;
+display: flex;
+align-items: center;
+justify-content: center;
+color:black;
+
+transition: all 0.2s ease;
+}
+
+.para-container button:hover::after{
+transform: translateX(-100%);
+}
+
+.text-container{
+  height:fit-content;
+  width:100%;
+  overflow: hidden;
+}
+.text-container > * {
+  transition:all 0.5s ease;
+  transform:translateY(100%);
+}
+
+.slidein{
+  animation: slidein 0.5s forwards;
+  animation-delay: 0.5s;
+}
+
+
+@keyframes slidein{
+  0%{
+    transform:translateY(100%);
+  }
+  100%{
+    transform:translateY(0%);
+  }
+}
+
+@media (max-width: 768px) {
+  .container::after {
+    top: -0.225ch;
+  }
+
+  .para-container {
+    position: relative;
+    width: 100%;
+    padding: 1rem;
+  }
+  header {
+    width: 100%;
+    background: white;
+  }
+}
