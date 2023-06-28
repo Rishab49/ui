@@ -29,6 +29,7 @@ cardElements.forEach((card) => {
       paths[1].style.transition = "stroke-dashoffset 0.5s ease";
       paths[0].style.transition = "stroke-dashoffset 0.5s ease";
       power.style.transition = "transform 0.5s cubic-bezier(.01,1.07,.81,1.24)";
+      power.style.transitionDelay = "0.2s";
       specialPower.style.transition =
         "transform 0.5s cubic-bezier(.01,1.07,.81,1.24)";
       paths[0].style.strokeDashoffset = "0px";
