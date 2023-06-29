@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="https://api.fontshare.com/v2/css?f[]=switzer@900,100,400,300,500&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <header>
+      <h4>ST</h4>
+      <nav>
+        <a
+          href="#"
+          class="active"
+          onclick="(() => {[...this.parentElement.children].forEach(e => e.classList.remove('active')),this.classList.add('active')})()"
+          >Home</a
+        >
+        <a
+          href="#"
+          onclick="(() => {[...this.parentElement.children].forEach(e => e.classList.remove('active')),this.classList.add('active')})()"
+          >About</a
+        >
+        <a
+          href="#"
+          onclick="(() => {[...this.parentElement.children].forEach(e => e.classList.remove('active')),this.classList.add('active')})()"
+          >Projects</a
+        >
+        <a
+          href="#"
+          onclick="(() => {[...this.parentElement.children].forEach(e => e.classList.remove('active')),this.classList.add('active')})()"
+          >Contact</a
+        >
+      </nav>
+    </header>
+    <div class="container">
+      <div class="ornamental">
+        <div class="ornamental_circles"></div>
+      </div>
+      <div class="text_container">
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate
+          sapiente non voluptatem voluptas, tenetur nobis, quidem modi suscipit
+          harum ipsum a facilis minus consequuntur eum impedit qui optio
+          asperiores ut?
+        </p>
+        <button type="button">Fund Now</button>
+      </div>
+      <div class="bg_container"></div>
+      <div class="img_container">
+        <img src="./bg.png" />
+      </div>
+    </div>
+  </body>
+</html>
