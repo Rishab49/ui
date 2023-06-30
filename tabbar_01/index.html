@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tab bar</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><span class="material-symbols-rounded"> home </span></li>
+        <li><span class="material-symbols-rounded"> add_circle </span></li>
+        <li><span class="material-symbols-rounded"> bookmark </span></li>
+        <li><span class="material-symbols-rounded"> person </span></li>
+        <li><span class="material-symbols-rounded"> settings </span></li>
+      </ul>
+    </nav>
+  </body>
+  <script>
+    document.querySelectorAll("li").forEach((li) =>
+      li.addEventListener("click", (event) => {
+        console.log(event);
+        document.querySelectorAll("li").forEach((e,index) => {
+          e.children[0] != event.target
+            ? e.classList.remove("active")
+            : (e.classList.add("active"),moveLight(index));
+        });
+      })
+    );
+
+    window.addEventListener("load", () => {
+      console.log(document.querySelector("li").getBoundingClientRect().left);
+      console.log(document.querySelector("nav").getBoundingClientRect().left);
+      moveLight(0);
+    });
+
+    function moveLight(index) {
+      let left =
+        document.querySelectorAll("li")[index].getBoundingClientRect().left -
+        document.querySelector("nav").getBoundingClientRect().left;
+      document.querySelector("nav").style.setProperty("--left",`${left - 8}px`);
+    }
+  </script>
+</html>
