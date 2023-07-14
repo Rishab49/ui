@@ -387,14 +387,14 @@ footer .upper {
 
 header {
   position: fixed;
-  top:0;
-  left:0;
+  top: 0;
+  left: 0;
   padding: 0.5rem 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width:100%;
-  z-index:20 ;
+  width: 100%;
+  z-index: 20;
 }
 
 header ul {
@@ -407,4 +407,10 @@ header ul {
 header a {
   text-decoration: none;
   color: white;
+}
+
+@media (max-width: 768px) {
+  header ul {
+    display: none;
+  }
 }
